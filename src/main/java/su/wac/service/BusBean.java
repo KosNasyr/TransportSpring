@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import su.wac.model.jpa.Bus;
 
@@ -36,7 +37,7 @@ public class BusBean {
         Session session = this.sessionFactory.getCurrentSession();
         return session.find(Bus.class,id);
     }
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updateBus(Bus bus) {
         Session session = this.sessionFactory.getCurrentSession();
         session.merge(bus);

@@ -23,16 +23,16 @@ public class TruckApi {
     }
 
     @PostMapping(value = "add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addTruck(Truck truck){
+    public void addTruck(@RequestBody Truck truck){
         truckBean.createNewTruck(truck);
     }
 
-    @PutMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void editTruck(Truck truck){
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editTruck(@RequestBody Truck truck){
         truckBean.updateTruck(truck);
     }
 
-    @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{id}")
     public void deleteTruck(@PathVariable("id")  int id) {
         truckBean.deleteTruck(id);
     }

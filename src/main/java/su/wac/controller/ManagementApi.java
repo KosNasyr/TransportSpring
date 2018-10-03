@@ -23,16 +23,16 @@ public class ManagementApi {
     }
 
     @PostMapping(value = "add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addManager(Management man) {
+    public void addManager(@RequestBody Management man) {
         managementBean.createNewManagement(man);
     }
 
-    @PutMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void editManagement(Management man) {
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editManagement(@RequestBody Management man) {
         managementBean.updateManagement(man);
     }
 
-    @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{id}")
     public void deleteManagement(@PathVariable("id") int id) {
         managementBean.deleteManagement(id);
     }

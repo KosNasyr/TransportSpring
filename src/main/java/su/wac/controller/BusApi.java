@@ -23,16 +23,16 @@ public class BusApi {
     }
 
     @PostMapping(value = "add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addBus(Bus bus){
+    public void addBus(@RequestBody Bus bus){
         busBean.createNewBus(bus);
     }
 
-    @PutMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void editBus(Bus bus){
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editBus(@RequestBody Bus bus){
         busBean.updateBus(bus);
     }
 
-    @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{id}")
     public void deleteBus(@PathVariable("id") int id) {
         busBean.deleteBus(id);
     }

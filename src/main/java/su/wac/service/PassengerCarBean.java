@@ -2,8 +2,10 @@ package su.wac.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import su.wac.model.jpa.PassengerCar;
 
@@ -24,8 +26,8 @@ public class PassengerCarBean{
         Query q = session.createNamedQuery("add_passengercar")
                     .setParameter(1,pc.getId())
                     .setParameter(2,pc.getTankAverage())
-                    .setParameter(3,pc.getDriver())
-                    .setParameter(4,pc.getRegistrationPlate());
+                    .setParameter(3,pc.getDriver(), StringType.INSTANCE)
+                    .setParameter(4,pc.getRegistrationPlate(), StringType.INSTANCE);
             q.getSingleResult();
     }
 
@@ -35,7 +37,7 @@ public class PassengerCarBean{
         return session.find(PassengerCar.class,id);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updatePassengerCar(PassengerCar pc) {
         Session session = this.sessionFactory.getCurrentSession();
         session.merge(pc);

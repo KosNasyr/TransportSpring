@@ -23,16 +23,16 @@ public class PassengerCarApi {
     }
 
     @PostMapping(value = "add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addPassengerCar(PassengerCar pc){
+    public void addPassengerCar(@RequestBody PassengerCar pc){
         passengerCarBean.createNewPC(pc);
     }
 
-    @PutMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void editPassengerCar(PassengerCar pc){
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editPassengerCar(@RequestBody PassengerCar pc){
         passengerCarBean.updatePassengerCar(pc);
     }
 
-    @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{id}")
     public void deletePassengerCar(@PathVariable("id") int id) {
         passengerCarBean.deletePassengerCar(id);
     }

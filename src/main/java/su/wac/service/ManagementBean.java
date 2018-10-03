@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import su.wac.model.jpa.Management;
 
@@ -33,7 +34,7 @@ public class ManagementBean {
         return session.find(Management.class,id);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updateManagement(Management man) {
         Session session = this.sessionFactory.getCurrentSession();
         session.merge(man);
